@@ -172,7 +172,7 @@ export default function ChallengeDetailScreen() {
                   <Pressable
                     key={t.id}
                     accessibilityRole="radio"
-                    accessibilityState={{ selected: teamChoice === t.id }}
+                    aria-checked={teamChoice === t.id}
                     onPress={() => setTeamChoice((cur) => (cur === t.id ? null : t.id))}
                     style={{ flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, paddingVertical: 8, borderRadius: 999, borderWidth: 2, borderColor: teamChoice === t.id ? t.color : colors.border }}
                   >

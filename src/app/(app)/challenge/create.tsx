@@ -7,7 +7,7 @@ import { Pressable, View } from 'react-native';
 import { DateTimeField } from '@/components/DateTimeField';
 import { Button, Card, Chip, IconButton, InlineNotice, Screen, ScreenHeader, SegmentedControl, SwitchRow, Text, TextField, toIconName, toast } from '@/components/ui';
 import { ACTIVITY_TYPES, ACTIVITY_TYPE_META } from '@/domain/activity-types';
-import { customWindow, deviceTimeZone, formatWindow, periodWindow } from '@/domain/periods';
+import { customWindow, deviceTimeZone, formatWindow, periodWindow, rollingWindow } from '@/domain/periods';
 import { displayToMeters } from '@/domain/units';
 import { type CreateChallengeInput, useCreateChallenge } from '@/features/challenges/api';
 import { COVER_KEYS, ChallengeCover, MODE_META } from '@/features/challenges/components';
@@ -63,7 +63,7 @@ export default function CreateChallengeScreen() {
         : null
       : recurring
         ? periodWindow(windowKind, now)
-        : { start: new Date(now.getFullYear(), now.getMonth(), now.getDate()), end: periodWindow(windowKind, now).end };
+        : rollingWindow(windowKind, now);
 
   const onSubmit = handleSubmit((v) => {
     setError(null);
@@ -109,7 +109,7 @@ export default function CreateChallengeScreen() {
               key={k}
               accessibilityRole="radio"
               accessibilityLabel={`Cover ${k}`}
-              accessibilityState={{ selected: cover === k }}
+              aria-checked={cover === k}
               onPress={() => setCover(k)}
               style={{ width: 44, height: 32, borderRadius: radii.sm, overflow: 'hidden', borderWidth: 2, borderColor: cover === k ? colors.accent : 'transparent' }}
             >
@@ -207,9 +207,9 @@ export default function CreateChallengeScreen() {
           render={({ field }) => (
             <SegmentedControl
               options={[
-                { value: 'weekly', label: 'Week' },
-                { value: 'monthly', label: 'Month' },
-                { value: 'yearly', label: 'Year' },
+                { value: 'weekly', label: recurring ? 'Week' : '7 days' },
+                { value: 'monthly', label: recurring ? 'Month' : '1 month' },
+                { value: 'yearly', label: recurring ? 'Year' : '1 year' },
                 { value: 'custom', label: 'Custom' },
               ]}
               value={field.value}

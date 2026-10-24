@@ -28,8 +28,7 @@ export function Icon({ name, size = 22, color, style, accessibilityLabel }: Icon
       color={color ?? colors.text}
       style={style}
       accessibilityLabel={accessibilityLabel}
-      accessibilityElementsHidden={!accessibilityLabel}
-      importantForAccessibility={accessibilityLabel ? 'yes' : 'no-hide-descendants'}
+      aria-hidden={!accessibilityLabel}
     />
   );
 }

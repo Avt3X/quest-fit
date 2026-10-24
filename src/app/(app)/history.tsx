@@ -57,7 +57,7 @@ export default function HistoryScreen() {
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }}>
           <StatTile label={bucket === 'week' ? 'Last 12 weeks' : 'Last 12 months'} value={units.compact(totals.d)} icon="map-marker-distance" tone="accent" />
           <StatTile label="Moving time" value={formatDurationShort(totals.t)} icon="timer-outline" />
-          <StatTile label={`Avg per ${bucket}`} value={`${(totals.n / periods).toFixed(1)} acts`} icon="calendar-sync" />
+          <StatTile label={`Activities per ${bucket}`} value={(totals.n / periods).toFixed(1)} icon="calendar-sync" />
         </View>
       </Card>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm }}>

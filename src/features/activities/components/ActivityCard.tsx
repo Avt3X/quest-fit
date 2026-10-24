@@ -74,7 +74,7 @@ export function ActivityCard({ activity, actor, isMine }: { activity: FeedActivi
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={reacted ? 'Remove kudos' : 'Give kudos'}
-          accessibilityState={{ selected: reacted }}
+          aria-selected={reacted}
           disabled={isMine}
           hitSlop={8}
           onPress={() => {

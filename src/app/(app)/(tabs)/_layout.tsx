@@ -27,9 +27,9 @@ function RecordButton({ focused, onPress }: { focused: boolean; onPress: () => v
   const ring = useAnimatedStyle(() => ({ transform: [{ scale: pulse.value }] }));
   return (
     <Pressable
-      accessibilityRole="button"
+      accessibilityRole="tab"
       accessibilityLabel={recording ? 'Return to the activity being recorded' : 'Record an activity'}
-      accessibilityState={{ selected: focused }}
+      aria-selected={focused}
       onPress={() => {
         haptics.medium();
         onPress();
@@ -72,7 +72,7 @@ function QuestTabBar({ state, navigateToTab, insets }: BottomTabBarProps) {
             key={route.key}
             accessibilityRole="tab"
             accessibilityLabel={meta.label}
-            accessibilityState={{ selected: focused }}
+            aria-selected={focused}
             onPress={() => {
               if (!focused) haptics.tap();
               navigateToTab(route.key);
@@ -89,8 +89,6 @@ function QuestTabBar({ state, navigateToTab, insets }: BottomTabBarProps) {
     </View>
   );
 }
-
-export const unstable_settings = { initialRouteName: 'home' };
 
 export default function TabsLayout() {
   return (

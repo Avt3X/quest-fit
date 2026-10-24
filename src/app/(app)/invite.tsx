@@ -53,7 +53,7 @@ export default function InviteScreen() {
                 right={
                   <Pressable
                     accessibilityRole="checkbox"
-                    accessibilityState={{ checked: isSelected }}
+                    aria-checked={isSelected}
                     accessibilityLabel={`Invite ${f.display_name}`}
                     onPress={() => setSelected((cur) => (cur.includes(f.user_id) ? cur.filter((x) => x !== f.user_id) : [...cur, f.user_id]))}
                     hitSlop={10}

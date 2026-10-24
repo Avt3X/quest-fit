@@ -29,6 +29,16 @@ export function periodWindow(preset: PeriodPreset, now: Date): Window {
   return { start: new Date(now.getFullYear(), 0, 1), end: new Date(now.getFullYear() + 1, 0, 1) };
 }
 
+/** One week, month or year starting today at local midnight (one-off challenges). */
+export function rollingWindow(preset: PeriodPreset, now: Date): Window {
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const end = new Date(start);
+  if (preset === 'weekly') end.setDate(end.getDate() + 7);
+  else if (preset === 'monthly') end.setMonth(end.getMonth() + 1);
+  else end.setFullYear(end.getFullYear() + 1);
+  return { start, end };
+}
+
 /** Inclusive local start date and exclusive end date chosen in a calendar UI. */
 export function customWindow(startDay: Date, lastDayInclusive: Date): Window {
   const start = new Date(startDay.getFullYear(), startDay.getMonth(), startDay.getDate());

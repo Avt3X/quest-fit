@@ -21,7 +21,7 @@ function TypeTile({ type, selected, onPress }: { type: ActivityType; selected: b
   return (
     <Pressable
       accessibilityRole="radio"
-      accessibilityState={{ selected }}
+      aria-checked={selected}
       accessibilityLabel={meta.label}
       onPress={() => {
         haptics.tap();

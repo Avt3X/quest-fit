@@ -112,7 +112,8 @@ export function DateTimeField({ label, value, onChange, withTime, minDate, maxDa
                     key={d.toISOString()}
                     accessibilityRole="button"
                     accessibilityLabel={d.toDateString()}
-                    accessibilityState={{ selected, disabled: !!disabled }}
+                    aria-selected={selected}
+                    aria-disabled={!!disabled}
                     disabled={!!disabled}
                     onPress={() => setDraft(d)}
                     style={[styles.cell, { alignItems: 'center', justifyContent: 'center' }]}

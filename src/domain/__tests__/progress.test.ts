@@ -1,5 +1,5 @@
 import { eligibilityProblem, validateActivityMetrics } from '../activity-rules';
-import { customWindow, periodWindow, startOfWeek } from '../periods';
+import { customWindow, periodWindow, rollingWindow, startOfWeek } from '../periods';
 import {
   activeStreak,
   estimateDaysToFinish,
@@ -132,6 +132,10 @@ describe('periods', () => {
     expect(month.end.getMonth()).toBe(10);
     const custom = customWindow(new Date(2026, 9, 1), new Date(2026, 9, 10));
     expect(custom.end.getDate()).toBe(11);
+    const rolling = rollingWindow('weekly', now);
+    expect(rolling.start.getDate()).toBe(24);
+    expect(rolling.end.getDate()).toBe(31);
+    expect(rollingWindow('monthly', now).end.getMonth()).toBe(10);
   });
 
   it('labels remaining time', () => {

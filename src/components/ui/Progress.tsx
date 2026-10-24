@@ -36,7 +36,9 @@ export function ProgressBar({ value, height = 10, color, trackColor, style, acce
     <View
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel}
-      accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped * 100) }}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(clamped * 100)}
       style={[{ height, borderRadius: height / 2, backgroundColor: trackColor ?? colors.track, overflow: 'hidden' }, style]}
     >
       <Animated.View style={[styles.fill, { borderRadius: height / 2, backgroundColor: color ?? colors.accent }, fill]} />
@@ -74,7 +76,9 @@ export function ProgressRing({ value, size = 120, stroke = 12, color, gradientTo
     <View
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel}
-      accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped * 100) }}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(clamped * 100)}
       style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}
     >
       <Svg width={size} height={size} style={StyleSheet.absoluteFill}>

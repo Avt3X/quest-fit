@@ -9,11 +9,13 @@ import { fonts } from '@/theme/tokens';
 
 import type { Checkpoint } from './api';
 import { JourneyArt, artPalette } from './JourneyArt';
+import { layoutLabels } from './label-layout';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const W = 360;
 const H = 300;
+const LABEL_SIZE = 11;
 
 function toSvg(path: readonly Vec2[]): string {
   return path.map((p, i) => `${i === 0 ? 'M' : 'L'}${(p[0] * W).toFixed(1)},${(p[1] * H).toFixed(1)}`).join(' ');
@@ -26,7 +28,6 @@ export interface JourneyMapProps {
   progressM: number;
   checkpoints: readonly Checkpoint[];
   unlockedIds: ReadonlySet<string>;
-  /** Optional second marker, e.g. the user's personal share inside a group expedition. */
   showLabels?: boolean;
   id: string;
 }
@@ -44,24 +45,21 @@ export function JourneyMap({ artKey, path, totalM, progressM, checkpoints, unloc
 
   const label = `Journey map. ${Math.round(fraction * 100)} percent complete. ${checkpoints.filter((c) => unlockedIds.has(c.id)).length} of ${checkpoints.length} checkpoints reached.`;
 
-  // Alternate labels above and below the path; drop labels that would still collide, but always
-  // keep the start, the finish, the last reached and the next checkpoint.
   const sorted = [...checkpoints].sort((a, b) => Number(a.distance_m) - Number(b.distance_m));
   const lastReached = [...sorted].reverse().find((c) => unlockedIds.has(c.id));
   const nextAhead = sorted.find((c) => !unlockedIds.has(c.id));
-  const placed: { x: number; y: number }[] = [];
-  const labelled = sorted.map((c, i) => {
+  const dots = sorted.map((c, i) => {
     const pt = pointAlongPath(path, totalM > 0 ? Number(c.distance_m) / totalM : 0);
-    const x = pt.x * W;
-    const y = pt.y * H;
-    const below = i % 2 === 1;
-    const ly = below ? y + 18 : y - 9;
     const important = i === 0 || i === sorted.length - 1 || c.id === lastReached?.id || c.id === nextAhead?.id;
-    const collides = placed.some((p) => Math.abs(p.y - ly) < 14 && Math.abs(p.x - x) < 90);
-    const show = important || !collides;
-    if (show) placed.push({ x, y: ly });
-    return { c, x, y, reached: unlockedIds.has(c.id), label: show, below };
+    return { c, x: pt.x * W, y: pt.y * H, reached: unlockedIds.has(c.id), important };
   });
+  const labels = showLabels
+    ? layoutLabels(
+        dots.map((d) => ({ id: d.c.id, text: d.c.name, x: d.x, y: d.y, important: d.important })),
+        { width: W, height: H, fontSize: LABEL_SIZE, obstacles: [{ x: marker.x * W, y: marker.y * H, r: 11 }] },
+      )
+    : [];
+  const names = new Map(sorted.map((c) => [c.id, c.name]));
 
   return (
     <View accessibilityRole="image" accessibilityLabel={label} style={{ aspectRatio: W / H, width: '100%', borderRadius: radii.xl, overflow: 'hidden', backgroundColor: art.sky[0] }}>
@@ -70,30 +68,21 @@ export function JourneyMap({ artKey, path, totalM, progressM, checkpoints, unloc
         <Path d={toSvg(path)} stroke="rgba(0,0,0,0.45)" strokeWidth={9} fill="none" strokeLinecap="round" strokeLinejoin="round" />
         <Path d={toSvg(path)} stroke="rgba(255,255,255,0.65)" strokeWidth={3} strokeDasharray="2 8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
         <Path d={toSvg(pathUpTo(path, fraction))} stroke={colors.accent} strokeWidth={5} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        {labelled.map(({ c, x, y, reached }) => (
+        {dots.map(({ c, x, y, reached }) => (
           <Circle key={c.id} cx={x} cy={y} r={reached ? 7 : 6} fill={reached ? colors.secondary : 'rgba(15,20,27,0.85)'} stroke="#FFFFFF" strokeWidth={2} />
         ))}
         <AnimatedCircle cx={marker.x * W} cy={marker.y * H} fill={colors.accent} animatedProps={pulseProps} />
         <Circle cx={marker.x * W} cy={marker.y * H} r={9} fill={colors.accent} stroke="#FFFFFF" strokeWidth={3} />
-        {showLabels
-          ? labelled
-              .filter((l) => l.label)
-              .map(({ c, x, y, below }) => {
-                const anchorEnd = x > W * 0.7;
-                const ly = below ? y + 20 : y - 11;
-                const lx = anchorEnd ? x - 10 : x + 10;
-                return (
-                  <G key={`label-${c.id}`}>
-                    <SvgText x={lx} y={ly} fontSize={11} fontFamily={fonts.bodySemi} fill="none" stroke="rgba(0,0,0,0.7)" strokeWidth={3.5} textAnchor={anchorEnd ? 'end' : 'start'}>
-                      {c.name}
-                    </SvgText>
-                    <SvgText x={lx} y={ly} fontSize={11} fontFamily={fonts.bodySemi} fill="#FFFFFF" textAnchor={anchorEnd ? 'end' : 'start'}>
-                      {c.name}
-                    </SvgText>
-                  </G>
-                );
-              })
-          : null}
+        {labels.map((l) => (
+          <G key={`label-${l.id}`}>
+            <SvgText x={l.x} y={l.y} fontSize={LABEL_SIZE} fontFamily={fonts.bodySemi} fill="none" stroke="rgba(0,0,0,0.7)" strokeWidth={3.5} textAnchor={l.anchor}>
+              {names.get(l.id)}
+            </SvgText>
+            <SvgText x={l.x} y={l.y} fontSize={LABEL_SIZE} fontFamily={fonts.bodySemi} fill="#FFFFFF" textAnchor={l.anchor}>
+              {names.get(l.id)}
+            </SvgText>
+          </G>
+        ))}
       </Svg>
     </View>
   );

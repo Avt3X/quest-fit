@@ -42,7 +42,7 @@ export function Chip({ label, selected, icon, onPress, tone = 'default', size = 
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ selected: !!selected }}
+      aria-selected={!!selected}
       accessibilityLabel={label}
       onPress={() => {
         haptics.tap();
@@ -89,7 +89,7 @@ export function SegmentedControl<T extends string>({
           <Pressable
             key={o.value}
             accessibilityRole="tab"
-            accessibilityState={{ selected }}
+            aria-selected={selected}
             accessibilityLabel={o.label}
             onPress={() => {
               if (!selected) haptics.tap();
