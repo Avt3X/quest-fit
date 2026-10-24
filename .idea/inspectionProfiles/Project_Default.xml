@@ -1,0 +1,121 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyArgumentListInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyComparisonWithNoneInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="8">
+            <item index="0" class="java.lang.String" itemvalue="3.7" />
+            <item index="1" class="java.lang.String" itemvalue="3.8" />
+            <item index="2" class="java.lang.String" itemvalue="3.9" />
+            <item index="3" class="java.lang.String" itemvalue="3.10" />
+            <item index="4" class="java.lang.String" itemvalue="3.11" />
+            <item index="5" class="java.lang.String" itemvalue="3.12" />
+            <item index="6" class="java.lang.String" itemvalue="3.13" />
+            <item index="7" class="java.lang.String" itemvalue="3.14" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyDictCreationInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyIncorrectDocstringInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyMethodMayBeStaticInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+          <option value="E302" />
+          <option value="E266" />
+          <option value="E251" />
+          <option value="E731" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyTypeCheckerInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="workers.UnverifiedYodleeFbbidQuery" />
+          <option value="mocktest.mocking.MockAct.post_request" />
+          <option value="mocktest.mocking.MockAct.get_success_verification_type" />
+          <option value="mocktest.mocking.MockAct.generate_vendor_response" />
+          <option value="mocktest.mocking.MockAct.get_verification_requests" />
+          <option value="mocktest.mocking.MockAct.generate_verification_response" />
+          <option value="mocktest.mocking.MockAct.get_token" />
+          <option value="mocktest.mocking.MockAct.store_new_attempt" />
+          <option value="mocktest.mocking.MockAct.getEncryptedSSNCollection" />
+          <option value="mocktest.mocking.MockAct.decrypt" />
+          <option value="mocktest.mocking.MockAct.is_match" />
+          <option value="mocktest.mocking.MockAct.isValid" />
+          <option value="mocktest.mocking.MockAct.entities" />
+          <option value="mocktest.mocking.MockAct.getEntitiesUpdater" />
+          <option value="mocktest.mocking.MockAct.getEntities" />
+          <option value="mocktest.mocking.MockAct.isMatched" />
+          <option value="sstorage.services.sstorage_logic.tnx_monitoring.TransactionMonitoringMatcher.TnxMonitoringMatcher.getMatchedSSNs" />
+          <option value="mocktest.mocking.MockAct.storeEntity" />
+          <option value="mocktest.mocking.MockAct.shouldRun" />
+          <option value="mocktest.mocking.MockAct.match" />
+          <option value="mocktest.mocking.MockAct.getFileId" />
+          <option value="mocktest.mocking.MockAct.markAsDone" />
+          <option value="sstorage.services.sstorage_logic.tnx_monitoring.SSNMatchHandler.*" />
+          <option value="mocktest.mocking.MockAct.get_payment_methods_for_business" />
+          <option value="mocktest.mocking.MockAct.get_unverified_fi_connected_accounts" />
+          <option value="mocktest.mocking.MockAct.get_item_accounts_by_fbbid" />
+          <option value="mocktest.mocking.MockAct.verify_by_match" />
+          <option value="mocktest.mocking.MockAct.isMatch" />
+          <option value="mocktest.mocking.MockAct.query" />
+          <option value="mocktest.mocking.MockAct.post" />
+          <option value="mocktest.mocking.MockAct.generateVerificationResponse" />
+          <option value="mocktest.mocking.MockAct.getGroups" />
+          <option value="mocktest.mocking.MockAct.add_ssn_secret" />
+          <option value="common.models.payments.PaymentPlan.PaymentPlan.direct_draw_payments" />
+          <option value="common.models.payments.PaymentPlan.PaymentPlan.buyer_finance_payments" />
+          <option value="mocktest.mocking.MockAct.getPaymentStatus" />
+          <option value="mocktest.mocking.MockAct.resolveByPaymentId" />
+          <option value="mocktest.mocking.MockAct.getAdhocMethodForBusiness" />
+          <option value="mocktest.mocking.MockAct.preparePaymentForOneTimeTransaction" />
+          <option value="mocktest.mocking.MockAct.settlePaymentIds" />
+          <option value="mocktest.mocking.MockAct.updatePaymentsWithTransactionStatus" />
+          <option value="mocktest.mocking.MockAct.adhocPaymentsFailed" />
+          <option value="mocktest.mocking.MockAct.getPaymentById" />
+          <option value="mocktest.mocking.MockAct.fetch_gverify" />
+          <option value="services.fi_connect.FIConnectQueueService.FIConnectQueueService.registered_api_funcs" />
+          <option value="collections.defaultdict.append" />
+          <option value="newrelic.agent" />
+          <option value="str.in_" />
+          <option value="int.in_" />
+          <option value="str.notin_" />
+          <option value="in.notin_" />
+          <option value="" />
+          <option value="int.notin_" />
+          <option value="datetime.datetime.desc" />
+          <option value="int.desc" />
+          <option value="int.isnot" />
+          <option value="int.distinct" />
+          <option value="str.isnot" />
+          <option value="common" />
+          <option value="services" />
+          <option value="common.models.payments.ProcessStatus.ProcessStatus.__table__" />
+          <option value="six.__init__.range" />
+          <option value="mocktest.mocking.MockAct.*" />
+          <option value="mock.patch.object" />
+          <option value="services.coupon.entity_infos.coupon_action_info.Listi" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="SqlDialectInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
